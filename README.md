@@ -282,7 +282,9 @@ Third required input:
 Type something or a file name to test the anonymization tool:
 ```
 
-The tool only supports csv file, txt files or a single manual input. 
+Please note that this tool only supports csv file, txt files or a single manual input. 
+
+In addition, there is a possibility that the packages may not be able to identify lowercase personal names. For better performance, please perform the anonymization process before any data pre-processing (converting text to lowercase).
 
 <details><summary> Click here for a step by step guide </summary>
 <p>
