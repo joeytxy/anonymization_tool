@@ -305,13 +305,13 @@ Step 4: Choose your package
 </p>
 </details>
   
-Step 5: When prompted for the third user input, type in file name with its file extension as shown in the screenshot
+Step 5: When prompted for the third user input, type in file name with its file extension as shown in the screenshot (Refer to last line)
   
 <img width="400" alt="image" src="https://user-images.githubusercontent.com/66881214/185334304-e8b5d52f-1cc0-481f-8332-8f0db11c2c95.png">
 
 The output file will be saved at the same directory with file name being FILENAME_anonymized_.txt, where FILENAME is the name of the original file. 
   
-Final Output: <img width="420" alt="image" src="https://user-images.githubusercontent.com/66881214/185334741-a2eeb79a-96e5-49ea-afad-825c04c0d228.png">
+<img width="420" alt="image" src="https://user-images.githubusercontent.com/66881214/185334741-a2eeb79a-96e5-49ea-afad-825c04c0d228.png">
 
 </p>
 </details>  
