@@ -150,7 +150,9 @@ Stanza is a Python natural language analysis package.
 Citation for stanza package:
 
 ```
-Peng Qi, Yuhao Zhang, Yuhui Zhang, Jason Bolton and Christopher D. Manning. 2020. Stanza: A Python Natural Language Processing Toolkit for Many Human Languages. In Association for Computational Linguistics (ACL) System Demonstrations. 2020. 
+Peng Qi, Yuhao Zhang, Yuhui Zhang, Jason Bolton and Christopher D. Manning. 2020. 
+Stanza: A Python Natural Language Processing Toolkit for Many Human Languages. 
+In Association for Computational Linguistics (ACL) System Demonstrations. 2020. 
 ```
 Article can be found [here](https://arxiv.org/abs/2003.07082)
 To download its paper in pdf format directly, click [here](https://nlp.stanford.edu/pubs/qi2020stanza.pdf)
