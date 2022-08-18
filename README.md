@@ -2,6 +2,8 @@
 
 An anonymisation tool which utilises NER packages such as flair, NLTK,spaCy and stanza to mask personal names (default). Other information such as NRIC, phone number etc can also be masked by giving corresponding input.
 
+## Data
+
 The tool was evaluated based on a self-modified version of the WikiNeural data that can be found [here](https://github.com/Babelscape/wikineural)
 
 Citation for dataset: 
@@ -34,7 +36,7 @@ Association for Computational Linguistics.
 
 As the main purpose of my anonymization tool is to mask personal names, sentences that do not contain personal names were removed. Due to the long run time required by packages like flair, only 1000 sentences were used for the final evaluation. 
 
-## Data Distribution 
+## Final Data Distribution 
 
 The 1000 sentences used for the final evaluation can contain varying number of words, ranging from 3 words to 112 words. Most of the sentences contain around 13 to 23 words/
 
@@ -242,3 +244,72 @@ The tracemalloc package is used to compare the allocated memory of the program. 
 |    intersection         |     1343              |     1007                      |
 
 (Exact values may vary. Current results are obtained on a MacBook Air M1 Processor)
+
+## Instructions on Anonymization Tool
+
+Besides personal name, the tool is also able to mask other details such as NRIC and phone number. There are three inputs required from the user.
+
+First required input:
+
+```
+Besides personal names, the following details may also be masked: 
+ 1. NRIC 
+ 2. Phone Number 
+ 3. ID 
+ 4. Case Number 
+ 5. Date 
+ 6. Admission Time 
+ 7. Ward Number 
+ 8. Bed Number 
+ 9. Patient Class 
+
+For example: Type 125 if you would also like to anonymize NRIC, Phone Number and Date. Type 0 if you do not wish to anonymize any additional details 
+ 
+Which of the following would you like to anonymize?:
+```
+
+Second required input:
+
+```
+Available packages: flair, spaCy, stanza, nltk. Choose a package:
+```
+
+Third required input:
+
+```
+Type something or a file name to test the anonymization tool:
+```
+
+The tool only supports csv file, txt files or a single manual input. 
+
+<details><summary> Click here for a step by step guide </summary>
+<p>
+  
+Example discharge summary text file modified from mtsamples: <img width="406" alt="image" src="https://user-images.githubusercontent.com/66881214/185334199-c0cdecfa-bdc3-41db-9e0b-e8ebc07f68e0.png">
+
+Step 1: Change directory to where files are stored 
+
+Step 2: Run code file anonymization_tool.py
+ 
+Step 3: Besides personal names, if you would like to anonymize additional details, key in the corresponding numbers. For example, if you would like to also mask NRIC and Phone Number, type ‘12’ and enter
+ 
+Step 4: Choose your package
+  
+<details><summary> Screenshot of Terminal for Step 1 to 4 </summary>
+<p>
+
+<img width="1057" alt="Screenshot 2022-08-18 at 3 18 27 PM" src="https://user-images.githubusercontent.com/66881214/185333888-1dce8e1f-5958-4a8e-b274-7b81d85c408d.png">
+
+</p>
+</details>
+  
+Step 5: When prompted for the third user input, type in file name with its file extension as shown in the screenshot
+  
+<img width="400" alt="image" src="https://user-images.githubusercontent.com/66881214/185334304-e8b5d52f-1cc0-481f-8332-8f0db11c2c95.png">
+
+The output file will be saved at the same directory with file name being FILENAME_anonymized_.txt, where FILENAME is the name of the original file. 
+  
+Final Output: <img width="420" alt="image" src="https://user-images.githubusercontent.com/66881214/185334741-a2eeb79a-96e5-49ea-afad-825c04c0d228.png">
+
+</p>
+</details>  
