@@ -311,6 +311,6 @@ Sample text file to anonymize: ![image](https://user-images.githubusercontent.co
 anonymize_file_input('sample_discharge_summary.txt', ['flair','stanza'], union_intersection='union', additional_details=[1,2,5])
 ```
 
-Output saved as [Original File Name] _ anonymized _ .txt in same directory: ![image](https://user-images.githubusercontent.com/66881214/186435144-fb030ef5-0a12-4241-b201-a05e66450626.png)
+Output saved as [Original File Name]\_anonymized\_.txt in same directory: ![image](https://user-images.githubusercontent.com/66881214/186435144-fb030ef5-0a12-4241-b201-a05e66450626.png)
 
   
