@@ -266,3 +266,51 @@ Note: A while loop is used under NLTK to obtain the start and end character inde
 
 ## Instructions on Anonymization Tool
 
+If you would like to anonymize a single manual input, use [anonymize_manual_input.py](/anonymize_manual_input.py)
+
+If you would like to anonymize a txt file or csv file, use [anonymize_file_input.py](/anonymize_file_input)
+- anonymize_manual_input is a nested function in anonymize_file_input, where the former is used to anonymize each line/row in the file input 
+
+```
+anonymize_manual_input(user_input,package=['stanza'],union_intersection=None,additional_details=None,additional_expression=None)
+```
+
+### Paramters
+
+- user_input: str , required 
+  - Item that user would like to anonymize 
+    - For anonymize_manual_input, string containing content user would like to mask
+    - For anonymize_file_input, string containing file name with file extension 
+  
+- package: list, optional, default 'stanza'
+  - List of strings representing package(s) users would like to use. To be typed in lowercase
+  
+- union_intersection: str, optional, default None 
+  - Only relevant if length of package is more than one 
+  - If length of package is more than one, an input is required 
+ 
+- additional_details: list, optional, default None 
+  - List of integers representing additional details users would like to mask 
+    1) NRIC
+    2) Phone Number 
+    3) ID 
+    4) Case Number 
+    5) Date
+    6) Admission Time 
+    7) Ward Number 
+    8) Bed Number
+    9) Patient Class
+  
+- additional_expression: list of nested lists, optional, default None 
+  - A list containing nested lists of length 2, containing a regular expression string and a string to replace identified text
+  - Eg [[r"(\d{8})","[Phone]"],[r"(\d{3})","[Hundred]"]]
+ 
+Sample text file to anonymize: ![image](https://user-images.githubusercontent.com/66881214/186433807-fbc8d1b1-b90c-4d41-bc48-f20a6e446648.png)
+
+```
+anonymize_file_input('sample_discharge_summary.txt', ['flair','stanza'], union_intersection='union', additional_details=[1,2,5])
+```
+
+Output saved as "[Original File Name]_anonymized_.txt" in same directory: ![image](https://user-images.githubusercontent.com/66881214/186435144-fb030ef5-0a12-4241-b201-a05e66450626.png)
+
+  
