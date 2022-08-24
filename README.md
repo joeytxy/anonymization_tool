@@ -211,16 +211,17 @@ flowchart TD
   G -- Union --> H["[Name] ate pasta. She met [Name] at the restaurant."]
   G -- Intersection --> I["[Name] Lee ate pasta. She met Anna at the restaurant"]
 ```
+
 ## Model Idea 
 
 ```mermaid
 flowchart TD
-  A[sentence = Joss Whedon was credited as executive producer throughout the run of the series];
-  A -- Obtain start character index and end character index of names identified --> B["[ [0,4] , [5,11] ]"];
-  B -- Combine consecutive words --> C["[0,11]"];
-  C -- Obtain name from original sentence --> D["sentence[0:11]"];
-  D -- Name identified --> E[Joss Whedon];
-  E -- Final Output --> F["[Name] was credited as executive producer throughout the run of the series"] 
+  A[sentence = 'Mary Lee ate pasta. She met Anna at the restaurant'];
+  A -- Obtain start character index and end character index of names identified --> B["[ [0,4] , [5,8], [28,32] ]"];
+  B -- Combine consecutive words --> C["[[0,8],[28,32]]"];
+  C -- Obtain name from original sentence --> D["sentence[0:8] <br/> sentence[28:32]"];
+  D -- Name identified --> E[Mary Lee \n Anna];
+  E -- Final Output --> H["[Name] ate pasta. She met [Name] at the restaurant"] 
 ```
 
 ## Evaluation Criteria
