@@ -287,13 +287,12 @@ Note: A while loop is used under NLTK to obtain the start and end character inde
 
 If you would like to anonymize a single manual input, use [anonymize_manual_input.py](/anonymize_manual_input.py)
 
-If you would like to anonymize a txt file or csv file, use [anonymize_file_input.py](/anonymize_file_input)
+If you would like to anonymize a txt file or csv file, use [anonymize_file_input.py](/anonymize_file_input.py)
 - anonymize_manual_input is a nested function in anonymize_file_input, where the former is used to anonymize each line/row in the file input 
 
 ```
 anonymize_manual_input(user_input,package=['stanza'],union_intersection=None,additional_details=None,additional_expression=None)
 ```
-
 ### Paramters
 
 - user_input: str , required 
