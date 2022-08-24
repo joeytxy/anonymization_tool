@@ -1,6 +1,3 @@
-import warnings
-warnings.filterwarnings('ignore')
-
 def anonymize_file_input(user_input,package=['stanza'],union_intersection=None,additional_details=None,additional_expression=None):
     if len(package)==1 and union_intersection!=None:
         print('Unable to combine less than 2 packages')
