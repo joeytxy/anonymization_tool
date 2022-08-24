@@ -323,7 +323,7 @@ anonymize_manual_input(user_input,package=['stanza'],union_intersection=None,add
     | 9       | Patient Class   |
   
 - additional_expression: list of nested lists, optional, default None 
-  - A list containing nested lists of length 2, containing a regular expression string and a string to replace identified text
+  - A list containing nested lists of length 2. Nested list contains a regular expression string and a string to replace identified text
   - Eg [[r"(\d{8})","[Phone]"],[r"(\d{3})","[Hundred]"]]
  
 Sample text file to anonymize: ![image](https://user-images.githubusercontent.com/66881214/186433807-fbc8d1b1-b90c-4d41-bc48-f20a6e446648.png)
