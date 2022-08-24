@@ -72,7 +72,7 @@ def anonymize_manual_input(user_input,package=['stanza'],union_intersection=None
             nltk_index_list=[]
 
             #append each range (start char index, end char index) of name to list
-            #combine if the words are consecutive (to eliminate problem of identifying first name and last name as two names
+            #combine if the words are consecutive (to eliminate problem of identifying first name and last name as two names)
             for i in df['index']:
                 if len(nltk_index_list)>0 and i[0]==nltk_index_list[-1][1]+1:
                     nltk_index_list[-1][1]=i[1]
