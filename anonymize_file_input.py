@@ -272,7 +272,3 @@ def anonymize_file_input(user_input,package=['stanza'],union_intersection=None,a
             df_anonymized.to_csv(user_input.replace(".csv", "_anonymized_") + ".csv", index=False)
         else:
             print("Invalid Input")
-
-
-
-
