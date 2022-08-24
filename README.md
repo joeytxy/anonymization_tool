@@ -52,6 +52,13 @@ In addition, most of the sentences used in the final evaluation contain only 1 p
 
 ## Packages Involved 
 
+### General 
+
+- import pandas as pd (to read csv file)
+- from operator import itemgetter
+- from itertools import groupby
+- import re
+
 ### NLTK 
 
 This is an open source Python library for Natural Language Processing. 
