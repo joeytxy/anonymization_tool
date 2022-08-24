@@ -217,8 +217,8 @@ flowchart TD
 ```mermaid
 flowchart TD
   A[sentence = 'Mary Lee ate pasta. She met Anna at the restaurant'];
-  A -- Obtain start character index and end character index of names identified --> B["[ [0,4] , [5,8], [28,32] ]"];
-  B -- Combine consecutive words --> C["[[0,8],[28,32]]"];
+  A -- Obtain start character index and end character index of names identified --> B["[ [0,8], [28,32] ]  (For cases where package correcly identifies full name) <br/><br/> or <br/><br/> [ [0,4] , [5,8], [28,32] ] (For cases where package mistakes first name and last name as two separate names)"];
+  B -- Combine consecutive words where possible --> C["[[0,8],[28,32]]"];
   C -- Obtain name from original sentence --> D["sentence[0:8] <br/> sentence[28:32]"];
   D -- Name identified --> E[Mary Lee \n Anna];
   E -- Final Output --> H["[Name] ate pasta. She met [Name] at the restaurant"] 
