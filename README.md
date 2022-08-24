@@ -2,6 +2,15 @@
 
 An anonymisation tool which utilises NER packages such as flair, NLTK,spaCy and stanza to mask personal names (default). Other information such as NRIC, phone number etc can also be masked by giving corresponding input.
 
+# Table of Contents
+1. [Data](#Data)
+2. [Packages Involved](#Packages-Involved)
+3. [Model Idea](#Model-Idea)
+4. [Evaluation Criteria](#Evaluation-Criteria)
+5. [Perfomance](#Performance)
+6. [Instructions on Anonymization Tool](#Instructions-on-Anonymization-Tool)
+
+
 ## Data
 
 The tool was evaluated based on a self-modified version of the WikiNeural data that can be found [here](https://github.com/Babelscape/wikineural)
@@ -36,7 +45,7 @@ Association for Computational Linguistics.
 
 As the main purpose of my anonymization tool is to mask personal names, sentences that do not contain personal names were removed. Due to the long run time required by packages like flair, only 1000 sentences were used for the final evaluation. 
 
-## Final Data Distribution 
+### Final Data Distribution 
 
 The 1000 sentences used for the final evaluation can contain varying number of words, ranging from 3 words to 112 words. Most of the sentences contain around 13 to 23 words
 
@@ -202,8 +211,19 @@ flowchart TD
   G -- Union --> H["[Name] ate pasta. She met [Name] at the restaurant."]
   G -- Intersection --> I["[Name] Lee ate pasta. She met Anna at the restaurant"]
 ```
+## Model Idea 
 
-## Evaluation 
+```mermaid
+flowchart TD
+  A[sentence = Joss Whedon was credited as executive producer throughout the run of the series];
+  A -- Obtain start character index and end character index of names identified --> B["[ [0,4] , [5,11] ]"];
+  B -- Combine consecutive words --> C["[0,11]"];
+  C -- Obtain name from original sentence --> D["sentence[0:11]"];
+  D -- Name identified --> E[Joss Whedon];
+  E -- Final Output --> F["[Name] was credited as executive producer throughout the run of the series"] 
+```
+
+## Evaluation Criteria
 
 ### Recall and Precision 
 
@@ -222,15 +242,6 @@ For overall level:
 $$ Overall\ Recall = {Total\ number\ of\ correct\ [Name]\ tag\ by\ package\ over\ 1000\ sentences \over Total\ number\ of\ [Name]\ tag\ in\ original\ 1000\ sentence}  $$
 
 $$ Overall\ Precision = {Total\ number\ of\ correct\ [Name]\ tag\ by\ package\ over\ 1000\ sentences \over Total\ number\ of\ [Name]\ tag\ by\ package\ over\ 1000\ sentences}  $$
-
-There are cases where the package is able to detect both the first name and last name as names but treated them as two separate names during the masking process. An example is shown below:
-
-| Sentence                                                                                                                                  | Output by tool                                                                                                                          |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Joss Whedon was credited as executive producer throughout the run of the series , and for the first five seasons ( 1997 – 2001 ) he was also the showrunner , supervising the writing and all aspects of production |  [Name] [Name] was credited as executive producer throughout the run of the series , and for the first five seasons ( 1997 – 2001 ) he was also the showrunner , supervising the writing and all aspects of production |
-
-Hence, an additional step  was performed in the tool to remove any consecutive [Name] tags, leaving just one single [Name] tag for one name. 
-
 
 ### Speed
 
