@@ -175,6 +175,8 @@ In addition, you will need to run the following lines in a Python interactive in
 import stanza
 stanza.download('en')
 ```
+Additional packages required: NA
+
 ### Union and Intersection of Packages 
 
 In the tool, users can either use any of the packages mentioned above or choose to have an intersection/union among the packages. 
