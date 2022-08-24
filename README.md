@@ -310,23 +310,17 @@ anonymize_manual_input(user_input,package=['stanza'],union_intersection=None,add
 - additional_details: list, optional, default None 
   - List of integers representing additional details users would like to mask 
   
-    1 NRIC
-    
-    2 Phone Number 
-    
-    3 ID 
-    
-    4 Case Number 
-    
-    5 Date
-    
-    6 Admission Time 
-    
-    7 Ward Number 
-    
-    8 Bed Number
-    
-    9 Patient Class
+    | Integer | Information     | 
+    |---------|-----------------|
+    | 1       | NRIC            |      
+    | 2       | Phone Number    |
+    | 3       | ID              |
+    | 4       | Case Number     |
+    | 5       | Date            |
+    | 6       | Admission Time  |
+    | 7       | Ward Number     |
+    | 8       | Bed Number      |
+    | 9       | Patient Class   |
   
 - additional_expression: list of nested lists, optional, default None 
   - A list containing nested lists of length 2, containing a regular expression string and a string to replace identified text
