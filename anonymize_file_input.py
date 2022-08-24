@@ -1,8 +1,8 @@
 def anonymize_file_input(user_input,package=['stanza'],union_intersection=None,additional_details=None,additional_expression=None):
     if len(package)==1 and union_intersection!=None:
-        print('Unable to combine less than 2 packages')
+        raise Exception('Unable to combine less than 2 packages')
     elif len(package)>1 and union_intersection==None:
-        print('Please state if you would  like to intersect or union the packages you have stated')
+        raise Exception('Please state if you would  like to intersect or union the packages you have stated')
     else:
         import pandas as pd
         from operator import itemgetter
