@@ -18,7 +18,7 @@ Association for Computational Linguistics.
 <details><summary>Preview of Raw Dataset </summary>
 <p>
 
-<img width="123" alt="image" src="https://user-images.githubusercontent.com/66881214/185170721-d0573eaf-3cb8-4525-8479-b6b8125ba5c0.png">
+<img width="200" alt="image" src="https://user-images.githubusercontent.com/66881214/185170721-d0573eaf-3cb8-4525-8479-b6b8125ba5c0.png">
 
 </p>
 </details>
