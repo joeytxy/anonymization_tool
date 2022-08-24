@@ -48,7 +48,7 @@ In addition, most of the sentences used in the final evaluation contain only 1 p
 
 | Sentence with 16 Personal Names                                                                                                                                  | Expected Output                                                                                                                          |
 | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Croatia has been the home of many famous inventors , including Fausto Veranzio , Giovanni Luppis , Slavoljub Eduard Penkala , Franjo Hanaman , and Nikola Tesla , as well as scientists , such as Franciscus Patricius , Nikola Nalje≈°koviƒá , Nikola Vitov Guƒçetiƒá , Josip Franjo Domin , Marino Ghetaldi , Roger Joseph Boscovich , Andrija Mohoroviƒçiƒá , Ivan Supek , Ivan ƒêikiƒá , Miroslav Radman and Marin Soljaƒçiƒá | Croatia has been the home of many famous inventors , including [Name] , [Name] , [Name] , [Name] , and [Name] , as well as scientists , such as [Name] , [Name] , [Name] , [Name] , [Name] , [Name] , [Name] , [Name] , [Name] , [Name] and [Name] |
+| Croatia has been the home of many famous inventors, including Fausto Veranzio, Giovanni Luppis, Slavoljub Eduard Penkala, Franjo Hanaman, and Nikola Tesla, as well as scientists, such as Franciscus Patricius, Nikola Nalješković, Nikola Vitov Gučetić, Josip Franjo Domin, Marino Ghetaldi, Roger Joseph Boscovich, Andrija Mohorovičić, Ivan Supek, Ivan Đikić, Miroslav Radman and Marin Soljačić.  | Croatia has been the home of many famous inventors , including [Name] , [Name] , [Name] , [Name] , and [Name] , as well as scientists , such as [Name] , [Name] , [Name] , [Name] , [Name] , [Name] , [Name] , [Name] , [Name] , [Name] and [Name] |
 
 ## Packages Involved 
 
@@ -79,6 +79,8 @@ nltk.download('averaged_perceptron_tagger')
 nltk.download('maxent_ne_chunker')
 nltk.download('words')
 ```
+Additional packages required: pandas
+
 ### spaCy 
 
 spaCy is a library for advanced Natural Language Processing in Python. 
@@ -118,6 +120,7 @@ To download the model, run the following line in your command prompt/terminal:
 ```
 python -m spacy download en_core_web_sm
 ```
+Additional packages required: NA
 
 ### flair 
 
@@ -142,6 +145,7 @@ To use the package, run the following line in your command prompt/terminal:
 ```
 pip install flair 
 ```
+Additonal packages required: spacy and en_core_wed_sm (Used under flair's use_tokenizer argument)
 
 ### stanza 
 
@@ -177,19 +181,27 @@ In the tool, users can either use any of the packages mentioned above or choose 
 
 ```mermaid
 flowchart TD
-  A[flair: Alice Tan, Lim, Jess \n \n  stanza: Alice Tan, Lim, Jess \n \n  NLTK: Alice, Jess \n \n spaCy: Alice Tan, Jess]-->B{Union or Intersection};
-  B -- Union --> C[Alice Tan, Alice, Lim, Jess];
-  B -- Intersection --> D[Alice, Jess];
+  A[Mary Lee ate pasta. She met Anna at the restaurant.]-->B{{Choice of Package}};
+  B -- NLTK --> C["[Name] Lee ate pasta. She met [Name] at the restaurant."];
+  B -- spaCy --> D["[Name] ate pasta. She met Anna at the restaurant."];
+  B -- flair --> E["[Name] ate pasta. She met [Name] at the restaurant."];
+  B -- stanza --> F["[Name] ate pasta. She met [Name] at the restaurant."];
+  C --> G{{Union or Intersection}}
+  D --> G
+  E --> G
+  F --> G
+  G -- Union --> H["[Name] ate pasta. She met [Name] at the restaurant."]
+  G -- Intersection --> I["[Name] Lee ate pasta. She met Anna at the restaurant"]
 ```
 
 ## Evaluation 
 
 ### Recall and Precision 
 
-$$ Recall = {True Positive \over True Positive + False Negative } 
+$$ Recall = {True\ Positive \over True Positive + False\ Negative } 
           = {Number\ of\ correct\ [Name]\ tag\ by\ package \over Number\ of\ [Name]\ tag\ in\ original\ sentence}  $$
 
-$$ Precision = {True Positive \over True Positive + False Positive }
+$$ Precision = {True\ Positive \over True\ Positive + False\ Positive }
              = {Number\ of\ correct\ [Name]\ tag\ by\ package \over Number\ of\ [Name]\ tag\ by\ package}  $$
 
 Recall and Precision were calculated for all packages on a sentence level and an overall level. 
@@ -217,8 +229,9 @@ The time package is used to compute the time taken for the anonymization process
              
 ```mermaid
 graph TD;
-    A[Import relevant and load packages]-->B[Complete anonymization process]; 
-    B-->C[Save the anonymized text/csv file];
+    A{{Function is called. Timer starts}} --> B{{Import relevant and load packages}};
+    B-->C{{Complete anonymization process}}; 
+    C-->D{{Save the anonymized text/csv file to corresponding destination. Timer ends}};
 ```
 
 ### Memory Blocks 
@@ -229,91 +242,25 @@ The tracemalloc package is used to compare the allocated memory of the program. 
 
 |                                   |     NLTK     |     spaCy    |     flair    |     stanza    |     Union    |     Intersection    |
 |-----------------------------------|--------------|--------------|--------------|---------------|--------------|---------------------|
-|     Precision (Sentence Level)    |     0.846    |     0.875    |     0.959    |     0.937     |     0.859    |     0.888           |
-|     Precision (Overall Level)     |     0.796    |     0.844    |     0.944    |     0.911     |     0.787    |     0.861           |
-|     Recall (Sentence Level)       |     0.696    |     0.622    |     0.838    |     0.855     |     0.871    |     0.524           |
-|     Recall (Overall Level)        |     0.695    |     0.623    |     0.852    |     0.865     |     0.863    |     0.522           |
+|     Precision (Sentence Level)    |     0.848    |     0.876    |     0.966    |     0.938     |     0.864    |     0.891           |
+|     Precision (Overall Level)     |     0.800    |     0.845    |     0.947    |     0.913     |     0.806    |     0.865           |
+|     Recall (Sentence Level)       |     0.698    |     0.623    |     0.856    |     0.857     |     0.874    |     0.531           |
+|     Recall (Overall Level)        |     0.698    |     0.624    |     0.867    |     0.868     |     0.878    |     0.526           |
 
 (Results may vary if different models or pipelines were used)
 
 |     Package Involved    |     Time Taken (s)    |     Peak Memory Block (MB)    |
 |-------------------------|-----------------------|-------------------------------|
-|     NLTK                |     26                |     116                       |
-|     spaCy               |     18                |     102                       |
-|     flair               |     702               |     1007                      |
-|     stanza              |     592               |     254                       |
-|     union               |     1379              |     1007                      |
-|    intersection         |     1343              |     1007                      |
+|     NLTK                |     55                |     0.742                     |
+|     spaCy               |     22                |     53                        |
+|     flair               |     751               |     971                       |
+|     stanza              |     693               |     212                       |
+|     union               |     1554              |     971                       |
+|    intersection         |     1600              |     971                       |
 
 (Exact values may vary. Current results are obtained on a MacBook Air M1 Processor)
 
+Note: A while loop is used under NLTK to obtain the start and end character index of the names identified. For spaCy, flair and stanza, these information could be obtained directly from the entities that the package has labelled.  
+
 ## Instructions on Anonymization Tool
 
-Besides personal name, the tool is also able to mask other details such as NRIC and phone number. There are three inputs required from the user.
-
-First required input:
-
-```
-Besides personal names, the following details may also be masked: 
- 1. NRIC 
- 2. Phone Number 
- 3. ID 
- 4. Case Number 
- 5. Date 
- 6. Admission Time 
- 7. Ward Number 
- 8. Bed Number 
- 9. Patient Class 
-
-For example: Type 125 if you would also like to anonymize NRIC, Phone Number and Date. Type 0 if you do not wish to anonymize any additional details 
- 
-Which of the following would you like to anonymize?:
-```
-
-Second required input:
-
-```
-Available packages: flair, spaCy, stanza, nltk. Choose a package:
-```
-
-Third required input:
-
-```
-Type something or a file name to test the anonymization tool:
-```
-
-Please note that this tool only supports csv file, txt files or a single manual input. 
-
-In addition, there is a possibility that the packages may not be able to identify lowercase personal names. For better performance, please perform the anonymization process before any data pre-processing (converting text to lowercase).
-
-<details><summary> Click here for a step by step guide </summary>
-<p>
-  
-Example discharge summary text file modified from mtsamples: <img width="406" alt="image" src="https://user-images.githubusercontent.com/66881214/185334199-c0cdecfa-bdc3-41db-9e0b-e8ebc07f68e0.png">
-
-Step 1: Change directory to where files are stored 
-
-Step 2: Run code file anonymization_tool.py
- 
-Step 3: Besides personal names, if you would like to anonymize additional details, key in the corresponding numbers. For example, if you would like to also mask NRIC and Phone Number, type ‘12’ and enter
- 
-Step 4: Choose your package
-  
-<details><summary> Screenshot of Terminal for Step 1 to 4 </summary>
-<p>
-
-<img width="1057" alt="Screenshot 2022-08-18 at 3 18 27 PM" src="https://user-images.githubusercontent.com/66881214/185333888-1dce8e1f-5958-4a8e-b274-7b81d85c408d.png">
-
-</p>
-</details>
-  
-Step 5: When prompted for the third user input, type in file name with its file extension as shown in the screenshot (Refer to last line)
-  
-<img width="400" alt="image" src="https://user-images.githubusercontent.com/66881214/185334304-e8b5d52f-1cc0-481f-8332-8f0db11c2c95.png">
-
-The output file will be saved at the same directory with file name being FILENAME_anonymized_.txt, where FILENAME is the name of the original file. 
-  
-<img width="420" alt="image" src="https://user-images.githubusercontent.com/66881214/185334741-a2eeb79a-96e5-49ea-afad-825c04c0d228.png">
-
-</p>
-</details>  
