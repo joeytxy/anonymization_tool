@@ -293,7 +293,7 @@ If you would like to anonymize a txt file or csv file, use [anonymize_file_input
 ```
 anonymize_manual_input(user_input,package=['stanza'],union_intersection=None,additional_details=None,additional_expression=None)
 ```
-### Paramters
+### Parameters
 
 - user_input: str , required 
   - Item that user would like to anonymize 
