@@ -208,10 +208,10 @@ def anonymize_manual_input(user_input,package=['stanza'],union_intersection=None
             if 2 in additional_details:
                 final_return = re.sub(r"(\d{8})", "[PHONE]", final_return, flags=re.IGNORECASE)
             if 3 in additional_details:
+                final_return = re.sub(r"(\d{10}[A-z])", "[CASENO]", final_return, flags=re.IGNORECASE)
+            if 4 in additional_details:
                 final_return = re.sub(r"([a-z]\d{4}[a-z])", "[ID]", final_return, flags=re.IGNORECASE)
                 final_return = re.sub(r"(\d{5}[a-z])", "[ID]", final_return, flags=re.IGNORECASE)
-            if 4 in additional_details:
-                final_return = re.sub(r"(\d{10}[A-z])", "[CASENO]", final_return, flags=re.IGNORECASE)
             if 5 in additional_details:
                 final_return = re.sub(r"(\d{1,2}.\d{1,2}.\d{2,4})", "[DATE]", final_return)
                 final_return = re.sub(r"(\d{1,2}.(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?).\d{2,4})", "[DATE]",final_return,flags=re.IGNORECASE)
