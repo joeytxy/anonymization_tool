@@ -163,6 +163,13 @@ pip install flair
 ```
 Additonal packages required: spacy and en_core_wed_sm (Used under flair's use_tokenizer argument)
 
+```
+pip install spacy
+```
+```
+python -m spacy download en_core_web_sm
+```
+
 ### stanza 
 
 Stanza is a Python natural language analysis package.
