@@ -28,29 +28,7 @@ def anonymize_file_input(user_input,package=['stanza'],union_intersection=None,a
         if 'stanza' in package:
             import stanza
             stanza_nlp = stanza.Pipeline('en', download_method=None)
-        # to obtain full list of index for eg [0,8]->[0,1,2,3,4,5,6,7,8]
-        def index_list(list1): 
-            final_list=[]
-            for i in list1:
-                for j in range(i[0],i[1]+1):
-                    final_list.append(j)
-            return final_list
-
-        #to obtain range for each set of consecutive numbers after union/intersection for eg [0,1,2,3,4,5] -> [0,5]
-        def range_lists(list1):
-            output=[]
-            for k, g in groupby(enumerate(list1), lambda x: x[0]-x[1]):
-                group=list(map(itemgetter(1), g))
-                output.append([group[0],group[-1]])
-            return output
-
-        #to obtain identified names for eg user_input[0:5]
-        def name_list(list1):
-            final_names=[]
-            for i in list1:
-                final_names.append(user_input[i[0]:i[1]])
-            final_names=sorted(final_names,key=len,reverse=True)
-            return final_names        
+       
         #anonymized_text function for each line/row in txt/csv file
         def anonymized_text(user_input,package=package,union_intersection=union_intersection,additional_details=additional_details,additional_expression=additional_expression):
             if len(package)==1 and union_intersection!=None:
@@ -59,6 +37,31 @@ def anonymize_file_input(user_input,package=['stanza'],union_intersection=None,a
                 print('Please state if you would like to intersect or union the packages you have stated')
             else:
                 final_return=user_input
+                
+                 # to obtain full list of index for eg [0,8]->[0,1,2,3,4,5,6,7,8]
+                def index_list(list1): 
+                    final_list=[]
+                    for i in list1:
+                        for j in range(i[0],i[1]+1):
+                            final_list.append(j)
+                    return final_list
+
+                #to obtain range for each set of consecutive numbers after union/intersection for eg [0,1,2,3,4,5] -> [0,5]
+                def range_lists(list1):
+                    output=[]
+                    for k, g in groupby(enumerate(list1), lambda x: x[0]-x[1]):
+                        group=list(map(itemgetter(1), g))
+                        output.append([group[0],group[-1]])
+                    return output
+
+                #to obtain identified names for eg user_input[0:5]
+                def name_list(list1):
+                    final_names=[]
+                    for i in list1:
+                        final_names.append(user_input[i[0]:i[1]])
+                    final_names=sorted(final_names,key=len,reverse=True)
+                    return final_names   
+                
                 accumulated=[]
 
                 if 'nltk' in package:
