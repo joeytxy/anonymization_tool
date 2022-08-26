@@ -31,7 +31,7 @@ def anonymize_file_input(user_input,package=['stanza'],union_intersection=None,a
        
         #anonymized_text function for each line/row in txt/csv file
         def anonymized_text(user_input,package=package,union_intersection=union_intersection,additional_details=additional_details,additional_expression=additional_expression):
-           final_return=user_input
+            final_return=user_input
 
              # to obtain full list of index for eg [0,8]->[0,1,2,3,4,5,6,7,8]
             def index_list(list1): 
