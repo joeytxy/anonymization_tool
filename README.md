@@ -375,7 +375,9 @@ Since IGNORECASE is specified, the alphabets can be of uppercase or lowercase.
 Example: ward:type b1
          ward type A
 ```
-  
+</p>
+</details>
+
 <details><summary>Bed Number</summary>
 <p>
 
@@ -403,7 +405,9 @@ The regular expression matches any text that start with the phrase "patient clas
 ```
 Example: patient class: CHAS B
 ```
-  
+</p>
+</details>
+
 To mask other informations, users have to provide a regular expression and a string to replace the matched text with. For more information, view [Instructions on Anonymization Tool](#Instructions-on-Anonymization-Tool)
 
 
