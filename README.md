@@ -231,6 +231,182 @@ flowchart TD
   E -- Final Output --> H["[Name] ate pasta. She met [Name] at the restaurant"] 
 ```
 
+### Use of character index
+
+While it is possible to use the entity text identified as PERSON by the packages directly, character index was used in this implementation to provide users with an union/intersection option. Using character index ensures that the union/intersection function is applied on the same word.
+
+Suppose we have this sentence: "Kim went to her office today. She had a meeting with Mr Kim." 
+(This is solely for illustration purposes. The actual output is different.)
+
+Package A tags "Kim" as PERSON. However, there is a possibility that A recognises the first "Kim" as a PERSON and not the second occurence. Let us assume that that is the case.
+
+Suppose we have another package B that tags both "Kim" as PERSON. Without the use of character index to determine, the intersection of both packages would have given the following output:
+
+'[Name] went to her office today. She had a meeting with Mr [Name].'. While this is a correct output, it does not fit the definition of intersection. 
+
+By using chracter index, we can recognise that A recognises character index 0 to 3 as a person name, and not chracter index 56 to 59. The intersection betweeen [0,1,2,3] and [0,1,2,3,35,57,58,59] would have given [0,1,2,3]. Masking the word at sentence[0:3] would have given us:
+
+'[Name] went to her office today. She had a meeting with Mr Kim.' , which fits our definition of intersection.
+
+Word index was not used as different packages may tokenise the sentence differently, resulting in the same word having a different index.
+
+### Masking of other details
+
+Regular expression is used to mask other personal details. The case is ignored (specified in a separate argument). In this tool, the following details can be masked:
+
+<details><summary>NRIC</summary>
+<p>
+  
+Regular expression : r"([sftg]\d{7}[a-z])"
+  
+Replaced with : "[NRIC]"
+  
+The regular expression matches to any text that starts with S/F/T/G , followed by 7 numeric digits, and ends with any alphabet. Since IGNORECASE is specified, the alphabets can be of uppercase or lowercase.
+  
+```
+Example: S1234567A 
+```
+  
+</p>
+</details>
+
+<details><summary>Phone Number</summary>
+<p>
+
+Regular expression : r"(\d{8})"
+  
+Replaced with : "[PHONE]"
+  
+The regular expression matches any 8 consecutive digits. 
+
+```  
+Example: 91008100 
+```
+  
+</p>
+</details>
+
+<details><summary>Case Number</summary>
+<p>
+
+Regular expression : r"(\d{10}[A-z])"
+  
+Replaced with : "[CASENO]"
+  
+The regular expression matches to any text starts with 10 consecutive digits followed by either an alphabet or the following symbols: [ \ ] ^ _ `
+  
+Since IGNORECASE is specified, the alphabets can be of uppercase or lowercase.
+  
+```  
+Example :  1234567890A 
+  
+           0123456789_ 
+```  
+</p>
+</details>
+  
+<details><summary>ID</summary>
+<p>
+  
+Regular expression : r"([a-z]\d{4}[a-z])"
+  
+2nd Regular expression: r"(\d{5}[a-z])"
+  
+Replace with : "[ID]"
+ 
+The first regular expression matches to any text that starts with an alphabet, followed by 4 consecutive digits and an alphabet. The second regular expression matches any text that starts with 5 consecutive digits, followed by any alphabet. Since IGNORECASE is specified, the alphabets can be of uppercase or lowercase.
+ 
+```  
+Example: A1234z
+  
+         12345A  
+``` 
+  
+</p>
+</details>
+
+<details><summary>Date</summary>
+<p> 
+  
+Regular expression : r"(\d{1,2}.\d{1,2}.\d{2,4})"
+  
+2nd Regular expression: r"(\d{1,2}.(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?).\d{2,4})"
+  
+Replace with: "[DATE]"
+  
+The first regular expression matches any text that starts with either 1 or 2 consecutive digits, followed by any character except newline, followed by either 1 or 2 consecutive digits, followed by any character except newline, followed by either 2 or 4 consecutive digits. The second regular expression matches any text that starts with either 1 or 2 consecutive digits, followed by any character except newline, followed by a month which can be of an abbreviated form (eg Jan) or the full form (January), followed by any character except newline, followed by either 2 or 4 consecutive digits. Since IGNORECASE is specified, the alphabets can be of uppercase or lowercase.
+  
+Examples:
+- 1/1/22
+- 21-12-2022
+- 05/04/2012
+- 1 January 2012
+- 05 aug 22
+  
+</p>
+</details>
+  
+<details><summary>Admission Time</summary>
+<p>
+
+Regular expression : r"(admission Time.\s\d+.\d+)"
+
+Replace with : "Admission Time: [Time]"
+  
+The regular expression matches any text that starts with the phrase "admission Time", followed by any character except newline, followed by any white space character, followed by one of more digit, followed by any character except newline, followed by one or more digit. Since IGNORECASE is specified, the alphabets can be of uppercase or lowercase.
+  
+```
+Example: admission time: 2:45 
+         Admission time: 12.30
+```
+</p>
+</details>
+
+<details><summary>Ward Number</summary>
+
+Regular expression : r"(ward.\w+\s[a-zA-z0-9]+)"
+Replace with : "Ward:[WardNo]"
+  
+The regular expression matches any text that starts with the phrase "ward", followed by any character except newline, followed by at least one occurence of a word character i.e letters, alphanumeric, digits and underscore, followed by any whitespace characters, followed by at least one occurance of alphabets/digits/the following symbols: [ \ ] ^ _ `
+  
+Since IGNORECASE is specified, the alphabets can be of uppercase or lowercase.
+ 
+```
+Example: ward:type b1
+         ward type A
+```
+  
+<details><summary>Bed Number</summary>
+<p>
+
+Regular expression : r"(bed.\s[a-z0-9]+)"
+
+Replace with : "Bed:[BedNo]"
+
+The regular expression matches any text that starts with the phrase "bed", followed by any character except newline, followed by any whitespace chracter, followed by at least one occurence of alphabet/digit. Since IGNORECASE is specified, the alphabets can be of uppercase or lowercase.
+ 
+``` 
+Example: bed: a12
+         BED: 10
+```
+</p>
+</details>
+  
+<details><summary>Patient Class</summary>
+ 
+Regular expression : r"(patient class.\s\w+\s[A-Z])"
+  
+Replace with : "Patient Class:[Class]"
+  
+The regular expression matches any text that start with the phrase "patient class", followed by any character except newline, followed by any whitespace character, followed by at least one occurence of a word character i.e letters, alphanumeric, digits and underscore, followed by any whitespace character, followed by any alphabet. Since IGNORECASE is specified, the alphabets can be of uppercase or lowercase.
+  
+```
+Example: patient class: CHAS B
+```
+  
+To mask other informations, users have to provide a regular expression and a string to replace the matched text with. For more information, view [Instructions on Anonymization Tool](#Instructions-on-Anonymization-Tool)
+
+
 ## Evaluation Criteria
 
 ### Recall and Precision 
@@ -321,8 +497,8 @@ anonymize_manual_input(user_input,package=['stanza'],union_intersection=None,add
     |---------|-----------------|
     | 1       | NRIC            |      
     | 2       | Phone Number    |
-    | 3       | ID              |
-    | 4       | Case Number     |
+    | 3       | Case Number     |
+    | 4       |  ID             |
     | 5       | Date            |
     | 6       | Admission Time  |
     | 7       | Ward Number     |
