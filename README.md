@@ -244,7 +244,7 @@ Suppose we have another package B that tags both "Kim" as PERSON. Without the us
 
 '[Name] went to her office today. She had a meeting with Mr [Name].'. While this is a correct output, it does not fit the definition of intersection. 
 
-By using chracter index, we can recognise that A recognises character index 0 to 3 as a person name, and not chracter index 56 to 59. The intersection betweeen [0,1,2,3] and [0,1,2,3,35,57,58,59] would have given [0,1,2,3]. Masking the word at sentence[0:3] would have given us:
+By using character index, we can recognise that A recognises character index 0 to 3 as a person name, and not character index 56 to 59. The intersection betweeen [0,1,2,3] and [0,1,2,3,35,57,58,59] would have given [0,1,2,3]. Masking the word at sentence[0:3] would have given us:
 
 '[Name] went to her office today. She had a meeting with Mr Kim.' , which fits our definition of intersection.
 
