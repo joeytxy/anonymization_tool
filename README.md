@@ -363,8 +363,10 @@ Example: admission time: 2:45
 </details>
 
 <details><summary>Ward Number</summary>
+<p>
 
 Regular expression : r"(ward.\w+\s[a-zA-z0-9]+)"
+  
 Replace with : "Ward:[WardNo]"
   
 The regular expression matches any text that starts with the phrase "ward", followed by any character except newline, followed by at least one occurence of a word character i.e letters, alphanumeric, digits and underscore, followed by any whitespace characters, followed by at least one occurance of alphabets/digits/the following symbols: [ \ ] ^ _ `
@@ -395,6 +397,7 @@ Example: bed: a12
 </details>
   
 <details><summary>Patient Class</summary>
+<p>
  
 Regular expression : r"(patient class.\s\w+\s[A-Z])"
   
