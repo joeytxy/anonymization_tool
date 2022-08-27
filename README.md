@@ -293,7 +293,7 @@ Regular expression : r"(\d{10}[A-z])"
   
 Replaced with : "[CASENO]"
   
-The regular expression matches to any text starts with 10 consecutive digits followed by either an alphabet or the following symbols: [ \ ] ^ _ `
+The regular expression matches to any text starts with 10 consecutive digits followed by either an alphabet or the following symbols: ``` [ \ ] ^ _ ` ```
   
 Since IGNORECASE is specified, the alphabets can be of uppercase or lowercase.
   
@@ -369,7 +369,7 @@ Regular expression : r"(ward.\w+\s[a-zA-z0-9]+)"
   
 Replace with : "Ward:[WardNo]"
   
-The regular expression matches any text that starts with the phrase "ward", followed by any character except newline, followed by at least one occurence of a word character i.e letters, alphanumeric, digits and underscore, followed by any whitespace characters, followed by at least one occurance of alphabets/digits/the following symbols: [ \ ] ^ _ `
+The regular expression matches any text that starts with the phrase "ward", followed by any character except newline, followed by at least one occurence of a word character i.e letters, alphanumeric, digits and underscore, followed by any whitespace characters, followed by at least one occurance of alphabets/digits/the following symbols: ``` [ \ ] ^ _ ` ```
   
 Since IGNORECASE is specified, the alphabets can be of uppercase or lowercase.
  
@@ -453,12 +453,26 @@ The tracemalloc package is used to compare the allocated memory of the program. 
 
 |                                   |     NLTK     |     spaCy    |     flair    |     stanza    |     Union    |     Intersection    |
 |-----------------------------------|--------------|--------------|--------------|---------------|--------------|---------------------|
-|     Precision (Sentence Level)    |     0.848    |     0.876    |     0.966    |     0.938     |     0.864    |     0.891           |
-|     Precision (Overall Level)     |     0.800    |     0.845    |     0.947    |     0.913     |     0.806    |     0.865           |
-|     Recall (Sentence Level)       |     0.698    |     0.623    |     0.856    |     0.857     |     0.874    |     0.531           |
-|     Recall (Overall Level)        |     0.698    |     0.624    |     0.867    |     0.868     |     0.878    |     0.526           |
+|     Precision (Sentence Level)    |     0.838    |     0.869    |     0.956    |     0.902     |     0.834    |     0.884           |
+|     Precision (Overall Level)     |     0.815    |     0.869    |     0.944    |     0.895     |     0.804    |     0.888           |
+|     Recall (Sentence Level)       |     0.682    |     0.616    |     0.852    |     0.814     |     0.847    |     0.520           |
+|     Recall (Overall Level)        |     0.704    |     0.639    |     0.867    |     0.838     |     0.870    |     0.543           |
 
 (Results may vary if different models or pipelines were used)
+
+Possible case where union does not do better than an individual package:
+
+```mermaid
+flowchart TD
+  A[sentence = 'The game is an adaptation of Peter Jackson 's 2001 film <br/> The Lord of the Rings : The Fellowship of the Ring <br/> and his 2002 film The Lord of the Rings : The Two Towers , <br/> which was released shortly after the game .'];
+  A -- flair--> B["The game is an adaptation of [Name] 's 2001 film <br/> The Lord of the Rings : The Fellowship of the Ring <br/> and his 2002 film The Lord of the Rings : The Two Towers ,  <br/> which was released shortly after the game ."];
+  A -- stanza --> C["The game is an adaptation of [Name] 2001 film <br/> The Lord of the Rings : The Fellowship of the Ring <br/> and his 2002 film The Lord of the Rings : The Two Towers , <br/> which was released shortly after the game ."];
+  B --> D{{Union}};
+  C --> D;
+  D -- Final Output --> E["The game is an adaptation of [Name] 2001 film <br/> The Lord of the Rings : The Fellowship of the Ring <br/> and his 2002 film The Lord of the Rings : The Two Towers , <br/> which was released shortly after the game ."] 
+```
+It can be observed that flair provides us with the correct output since  ``` 's ``` should not be considered as part of a person's name. However if we were to take an union of the stanza package and the flair package, ``` Peter Jackson 's ``` is masked due to stanza's tagging, giving us an incorrect input.
+
 
 |     Package Involved    |     Time Taken (s)    |     Peak Memory Block (MB)    |
 |-------------------------|-----------------------|-------------------------------|
