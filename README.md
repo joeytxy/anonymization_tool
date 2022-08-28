@@ -440,9 +440,8 @@ The time package is used to compute the time taken for the anonymization process
              
 ```mermaid
 graph TD;
-    A{{Function is called. Timer starts}} --> B{{Import relevant and load packages}};
-    B-->C{{Complete anonymization process}}; 
-    C-->D{{Save the anonymized text/csv file to corresponding destination. Timer ends}};
+    B{{Import relevant and load packages}}-->C{{Complete anonymization process}}; 
+    C-->D{{Save the anonymized text/csv file to corresponding destination}};
 ```
 
 ### Memory Blocks 
