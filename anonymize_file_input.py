@@ -216,7 +216,7 @@ def anonymize_file_input(user_input,package=['stanza'],union_intersection=None,a
                 if 1 in additional_details:
                     final_return = re.sub(r"([sftg]\d{7}[a-z])", "[NRIC]", final_return,flags=re.IGNORECASE) 
                 if 2 in additional_details:
-                    final_return = re.sub(r"(\d{8})", "[PHONE]", final_return, flags=re.IGNORECASE)
+                    final_return = re.sub(r"(\d{8})", "[PHONE]", final_return)
                 if 3 in additional_details:
                     final_return = re.sub(r"(\d{10}[A-z])", "[CASENO]", final_return, flags=re.IGNORECASE)
                 if 4 in additional_details:
