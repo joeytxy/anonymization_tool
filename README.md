@@ -475,14 +475,18 @@ It can be observed that flair provides us with the correct output since  ``` 's 
 
 |     Package Involved    |     Time Taken (s)    |     Peak Memory Block (MB)    |
 |-------------------------|-----------------------|-------------------------------|
-|     NLTK                |     55                |     0.742                     |
-|     spaCy               |     22                |     53                        |
-|     flair               |     751               |     971                       |
-|     stanza              |     693               |     212                       |
-|     union               |     1554              |     971                       |
-|    intersection         |     1600              |     971                       |
+|     NLTK                |     54                |      116                      |
+|     spaCy               |     24                |      102                      |
+|     flair               |     741               |     1068                      |
+|     stanza              |     709               |      253                      |
+|     union               |     1520              |     1080                      |
+|    intersection         |     1528              |     1080                      |
 
 (Exact values may vary. Current results are obtained on a MacBook Air M1 Processor)
+
+It can be observed that spaCy and NLTK are the faster packages, but at the expense of recall and precision. Although flair and stanza gave a higher recall and precision, they took a much longer time, about 30 times longer than that of spaCy, and about 10 times longer than that of NLTK. 
+
+It is also expected that the union and intersection will take a much longer time since they involve all packages. However, the intersection option did not do very well, which is not surprising since it is more restrictive. 
 
 Note: A while loop is used under NLTK to obtain the start and end character index of the names identified. For spaCy, flair and stanza, these information could be obtained directly from the entities that the package has labelled.  
 
@@ -496,6 +500,9 @@ If you would like to anonymize a txt file or csv file, use [anonymize_file_input
 ```
 anonymize_manual_input(user_input,package=['stanza'],union_intersection=None,additional_details=None,additional_expression=None)
 ```
+
+It was noted that the packages may not identify lowercase names as well as names with its first character capitalised. It is encouraged to not do any data pre-processing (converting entire text to lowercase) before using the anonymization tool.
+
 ### Parameters
 
 - user_input: str , required 
