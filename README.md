@@ -496,6 +496,7 @@ It is also expected that the union and intersection will take a much longer time
 |     stanza              |     685               |       6                       |
 |     union               |     1469              |      80                       |
 |    intersection         |     1456              |      80                       |
+
 (Values are calculated after packages have been imported)
 
 It appears that time taken is not significantly affected by the importing of packages but the peak memory block is. This suggests that the packages and models contribute significantly to the peak memory block.
