@@ -443,6 +443,7 @@ graph TD;
     B{{Import relevant and load packages}}-->C{{Complete anonymization process}}; 
     C-->D{{Save the anonymized text/csv file to corresponding destination}};
 ```
+A second comparison is done between the time taken for the anonymization process to be complete, given that the packages have already been imported. The respective results can be found under the [Performance](#Performance) section
 
 ### Memory Blocks 
 
@@ -472,7 +473,6 @@ flowchart TD
 ```
 It can be observed that flair provides us with the correct output since  ``` 's ``` should not be considered as part of a person's name. However if we were to take an union of the stanza package and the flair package, ``` Peter Jackson 's ``` is masked due to stanza's tagging, giving us an incorrect input.
 
-
 |     Package Involved    |     Time Taken (s)    |     Peak Memory Block (MB)    |
 |-------------------------|-----------------------|-------------------------------|
 |     NLTK                |     54                |      116                      |
@@ -482,13 +482,29 @@ It can be observed that flair provides us with the correct output since  ``` 's 
 |     union               |     1520              |     1080                      |
 |    intersection         |     1528              |     1080                      |
 
-(Exact values may vary. Current results are obtained on a MacBook Air M1 Processor)
+(Values include resources involved in importing the packages)
 
 It can be observed that spaCy and NLTK are the faster packages, but at the expense of recall and precision. Although flair and stanza gave a higher recall and precision, they took a much longer time, about 30 times longer than that of spaCy, and about 10 times longer than that of NLTK. 
 
 It is also expected that the union and intersection will take a much longer time since they involve all packages. However, the intersection option did not do very well, which is not surprising since it is more restrictive. 
 
-Note: A while loop is used under NLTK to obtain the start and end character index of the names identified. For spaCy, flair and stanza, these information could be obtained directly from the entities that the package has labelled.  
+|     Package Involved    |     Time Taken (s)    |     Peak Memory Block (MB)    |
+|-------------------------|-----------------------|-------------------------------|
+|     NLTK                |     52                |      72                       |
+|     spaCy               |     17                |       5                       |
+|     flair               |     736               |       5                       |
+|     stanza              |     685               |       6                       |
+|     union               |     1469              |      80                       |
+|    intersection         |     1456              |      80                       |
+(Values are calculated after packages have been imported)
+
+It appears that time taken is not significantly affected by the importing of packages but the peak memory block is. This suggests that the packages and models contribute significantly to the peak memory block.
+
+Note: 
+
+1) Exact values may vary. Current results are obtained on a MacBook Air M1 Processor and rounded up)
+
+2) A while loop is used under NLTK to obtain the start and end character index of the names identified. For spaCy, flair and stanza, these information could be obtained directly from the entities that the package has labelled.  
 
 ## Instructions on Anonymization Tool
 
