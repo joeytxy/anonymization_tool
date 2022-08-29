@@ -499,7 +499,9 @@ It is also expected that the union and intersection will take a much longer time
 
 (Values are calculated after packages have been imported)
 
-It appears that time taken is not significantly affected by the importing of packages but the peak memory block is. This suggests that the packages and models contribute significantly to the peak memory block.
+It appears that time taken is not significantly affected by the importing of packages but the peak memory block is. This suggests that the packages and models contribute significantly to the peak memory block. 
+
+The current code file involves importing all the packages before defining the functions. If you do not wish to import all the packages, you may comment out the relevant lines.  
 
 Note: 
 
@@ -516,7 +518,7 @@ If you would like to anonymize a single manual input, use the anonymized_text fu
 Sample:
 
 ```
-anonymized_text('George met Anna today, 29/8/2022 at the airport.',package=['flair'],additional details=[5])
+anonymized_text('George met Anna today, 29/8/2022 at the airport.',package=['flair'],additional_details=[5])
 ```
 
 If you would like to anonymize a txt file or csv file, use anonymized_file_input function
@@ -533,8 +535,8 @@ It was noted that the packages may not identify lowercase names as well as names
 
 - user_input: str , required 
   - Item that user would like to anonymize 
-    - For anonymize_manual_input, string containing content user would like to mask
-    - For anonymize_file_input, string containing file name with file extension 
+    - For anonymized_text, string containing content user would like to mask
+    - For anonymized_file_input, string containing file name with file extension 
   
 - package: list, optional, default 'stanza'
   - List of strings representing package(s) users would like to use. To be typed in lowercase
@@ -565,9 +567,37 @@ It was noted that the packages may not identify lowercase names as well as names
 Sample text file to anonymize: ![image](https://user-images.githubusercontent.com/66881214/186433807-fbc8d1b1-b90c-4d41-bc48-f20a6e446648.png)
 
 ```
-anonymize_file_input('sample_discharge_summary.txt', ['flair','stanza'], union_intersection='union', additional_details=[1,2,5])
+anonymized_file_input('sample_discharge_summary.txt', ['flair','stanza'], union_intersection='union', additional_details=[1,2,5])
 ```
 
 Output saved as [Original File Name]\_anonymized\_.txt in same directory: ![image](https://user-images.githubusercontent.com/66881214/186435144-fb030ef5-0a12-4241-b201-a05e66450626.png)
 
-  
+## Instructions on Anonymization Visualization Tool
+
+Note: 
+
+1) This code is to be run on Jupyter Notebook as it may not be supported on other platforms or terminal. 
+
+2) Only txt file/single manual input is accepted as input for this function. 
+
+3) This function does not return a downloadable file.
+
+Download and run anonymization_visualization_tool.ipynb on Jupyter Notebook. 
+
+For a single manual input, use the anonymized_text_color function
+
+Sample:
+
+```
+anonymized_text_color('George met Anna today, 29/8/2022 at the airport.',package=['flair'],additional_details=[5])
+```
+
+Output:
+
+![Screenshot 2022-08-29 at 10 51 44 PM](https://user-images.githubusercontent.com/66881214/187230019-117840dc-b1e2-4360-9f78-6adce743ec89.png)
+
+For txt file, use anonymized_file_input_color function
+
+
+
+
