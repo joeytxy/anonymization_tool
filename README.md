@@ -509,7 +509,7 @@ Note:
 
 ## Instructions on Anonymization Tool
 
-Download anonymization_tool.py
+Download and run anonymization_tool.py
 
 If you would like to anonymize a single manual input, use the anonymized_text function
 
