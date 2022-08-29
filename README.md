@@ -509,13 +509,22 @@ Note:
 
 ## Instructions on Anonymization Tool
 
-If you would like to anonymize a single manual input, use [anonymize_manual_input.py](/anonymize_manual_input.py)
+Download anonymization_tool.py
 
-If you would like to anonymize a txt file or csv file, use [anonymize_file_input.py](/anonymize_file_input.py)
-- anonymize_manual_input is a nested function in anonymize_file_input, where the former is used to anonymize each line/row in the file input 
+If you would like to anonymize a single manual input, use the anonymized_text function
+
+Sample:
 
 ```
-anonymize_manual_input(user_input,package=['stanza'],union_intersection=None,additional_details=None,additional_expression=None)
+anonymized_text('George met Anna today, 29/8/2022 at the airport.',package=['flair'],additional details=[5])
+```
+
+If you would like to anonymize a txt file or csv file, use anonymized_file_input function
+
+Sample:
+
+```
+anonymized_file_input('sample_discharge_summary.txt',package=['stanza','flair'],union_intersection='union',additional_details=[1,2,5],additional_expression=None)
 ```
 
 It was noted that the packages may not identify lowercase names as well as names with its first character capitalised. It is encouraged to not do any data pre-processing (converting entire text to lowercase) before using the anonymization tool.
