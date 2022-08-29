@@ -9,6 +9,7 @@ An anonymisation tool which utilises NER packages such as flair, NLTK,spaCy and 
 4. [Evaluation Criteria](#Evaluation-Criteria)
 5. [Perfomance](#Performance)
 6. [Instructions on Anonymization Tool](#Instructions-on-Anonymization-Tool)
+7. [Instructions on Anonymization Visualization Tool](#Instructions-on-Anonymization-Visualization-Tool)
 
 
 ## Data
