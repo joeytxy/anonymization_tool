@@ -67,7 +67,8 @@ def anonymized_text(user_input,package=['stanza'],union_intersection=None,additi
                     df=pd.concat([df,tmp])
             counter=0
             list_of_indices=[]
-
+            df['word']=df['word'].str.replace("\`\`","\"")
+            df['word']=df['word'].str.replace("\'\'","\"")
             #search for word's start index to end index in user_input
             for i in df['word']:
                 while counter<len(user_input):
