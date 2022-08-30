@@ -476,12 +476,12 @@ It can be observed that flair provides us with the correct output since  ``` 's 
 
 |     Package Involved    |     Time Taken (s)    |     Peak Memory Block (MB)    |
 |-------------------------|-----------------------|-------------------------------|
-|     NLTK                |     54                |      116                      |
-|     spaCy               |     24                |      102                      |
-|     flair               |     741               |     1068                      |
-|     stanza              |     709               |      253                      |
-|     union               |     1520              |     1080                      |
-|    intersection         |     1528              |     1080                      |
+|     NLTK                |     52                |      116                      |
+|     spaCy               |     17                |      102                      |
+|     flair               |     724               |     1068                      |
+|     stanza              |     605               |      253                      |
+|     union               |     1425              |     1080                      |
+|    intersection         |     1414              |     1080                      |
 
 (Values include resources involved in importing the packages)
 
@@ -491,12 +491,12 @@ It is also expected that the union and intersection will take a much longer time
 
 |     Package Involved    |     Time Taken (s)    |     Peak Memory Block (MB)    |
 |-------------------------|-----------------------|-------------------------------|
-|     NLTK                |     52                |      72                       |
-|     spaCy               |     17                |       5                       |
-|     flair               |     736               |       5                       |
-|     stanza              |     685               |       6                       |
-|     union               |     1469              |      80                       |
-|    intersection         |     1456              |      80                       |
+|     NLTK                |     50                |      72                       |
+|     spaCy               |     12                |       6                       |
+|     flair               |     711               |       6                       |
+|     stanza              |     622               |       6                       |
+|     union               |     1397              |      82                       |
+|    intersection         |     1391              |      82                       |
 
 (Values are calculated after packages have been imported)
 
@@ -564,6 +564,119 @@ It was noted that the packages may not identify lowercase names as well as names
 - additional_expression: list of nested lists, optional, default None 
   - A list containing nested lists of length 2. Nested list contains a regular expression string and a string to replace identified text
   - Eg [[r"(\d+.year.old)","[AGE]-year-old"]]
+
+### Sample Cases 
+
+#### Manual Input 
+
+The user_input must be given a value for the function to run. The following are some examples. 
+
+<details><summary>Normal Sentence </summary>
+<p>
+  
+For a regular sentence with no inner quotes, both single and double quotation marks can be used. 
+  
+Using single quotation:
+
+![Screenshot 2022-08-30 at 11 11 25 PM](https://user-images.githubusercontent.com/66881214/187473969-2cdf222b-3451-42e9-81a0-6d1c4fab29df.png)
+  
+Using double quotation:
+  
+![Screenshot 2022-08-30 at 11 15 15 PM](https://user-images.githubusercontent.com/66881214/187474983-ee66b576-04ad-42e6-8320-a28cabda05d2.png)
+  
+</p>
+</details>
+
+<details><summary>Sentences with Quotes </summary>
+<p>
+  
+Using single quotation marks for the quote within the input and double quotation marks for the overall input works for all packages:
+ 
+![Screenshot 2022-08-30 at 11 55 52 PM](https://user-images.githubusercontent.com/66881214/187484127-900aef70-3fc2-44f5-8070-1713890b7a5d.png)
+
+Using double quotation marks for the quote within the input and single quotation marks for the overall input works for all packages as well:
+  
+![Screenshot 2022-08-30 at 11 57 34 PM](https://user-images.githubusercontent.com/66881214/187484501-cdb4657a-ba0f-4c39-9d9a-1a6daf100b4d.png)
+
+If you would like to use double quotation marks for both the quote within the input and the overall input, a backslash must be used as shown:
+  
+![Screenshot 2022-08-30 at 11 59 36 PM](https://user-images.githubusercontent.com/66881214/187484921-47f3011a-1202-41e2-ba4e-7da6e43be7f1.png)
+  
+This also applies to single quotation marks:
+  
+![Screenshot 2022-08-31 at 12 05 06 AM](https://user-images.githubusercontent.com/66881214/187486028-486ee7cb-ff9e-45d4-bd1f-d19e4d74df1b.png)
+  
+</p>
+</details>
+
+<details><summary>Sentences with 's </summary>
+<p>
+ 
+A backslash must be used before ```'s``` for those who wishes to use single quotation marks in their input. This is optional for those who uses double quotation marks in their input
+  
+Using single quotation marks for input:
+  
+![Screenshot 2022-08-31 at 12 08 31 AM](https://user-images.githubusercontent.com/66881214/187486760-9428f1b1-57da-4d62-b9b7-af84125e9d8c.png)
+
+Using double quotation marks for input:
+  
+![Screenshot 2022-08-31 at 12 10 59 AM](https://user-images.githubusercontent.com/66881214/187487280-59b5518f-3786-4994-8f8d-6e8501be7b97.png)
+  
+</p>
+</details>
+
+<details><summary>Sentences with No Alphabets </summary>
+<p>
+ 
+![Screenshot 2022-08-31 at 12 18 25 AM](https://user-images.githubusercontent.com/66881214/187488593-35a39f9d-3a01-4c1c-bf76-894e3fef9876.png)
+  
+As seen in the screenshot above, the tool is able to take in forwardslash as an input. Backslash poses a problem since it is read as an escape character. Using another backslash allows it to become an acceptable input but it will result in two backslashes as shown: 
+  
+![Screenshot 2022-08-31 at 12 42 47 AM](https://user-images.githubusercontent.com/66881214/187493109-20f18d7d-d83d-49b3-9e49-453e6e4aa424.png)
+
+</p>
+</details>
+
+<details><summary>Empty Strings</summary>
+<p>
+ 
+NLTK is unable to accept empty strings as an input. The other 3 packages will return a empty string as shown below:
+  
+![Screenshot 2022-08-31 at 12 46 17 AM](https://user-images.githubusercontent.com/66881214/187493746-2c26c7db-e03c-44a5-b161-69bc385310f2.png)
+
+</p>
+</details>
+
+#### CSV file 
+
+Details are made up and not intended to represent any specific individual.  
+
+<details><summary>Click here to view sample csv file to anonymize (converted to table) </summary>
+<p>
+
+| ID     | Case Number | Patient Name     | Doctor Name(s)                                                       | Date    | Time                  | Patient Class               | NRIC      | Ward        | Bed      | Phone Number | Age         |
+| ------ | ----------- | ---------------- | -------------------------------------------------------------------- | ------- | --------------------- | --------------------------- | --------- | ----------- | -------- | ------------ | ----------- |
+| 11223Z | 1234567890A | Anna Wong Xin En | Anna was seen by Dr Lee Jun and will need to follow up with Dr Yong. | 16/8/22 | Admission Time: 10:45 | Patient Class: Subsidised C | S1234567A | Ward:Type C | Bed: C10 | 98765432     | 57-Year-Old |
+| B3334R | 1234567891B | Ben Ong Han Jin  | Ben was seen by Dr Tan and Dr Zack and has to follow up with Dr Lim. | 24/8/22 | Admission Time: 08:45 | Patient Class: Private A    | T0123456B | Ward Type A | Bed: A1  | 81112222     | 21 Year Old |
+
+</p>
+</details>
+
+
+<details><summary>Click here to view anonymized table</summary>
+<p>
+
+| ID     | Case Number | Patient Name | Doctor Name(s)                                                                          | Date     | Time                     | Patient Class           | NRIC     | Ward            | Bed           | Phone Number | Age              |
+| ------ | ----------- | ------------ | --------------------------------------------------------------------------------------- | -------- | ------------------------ | ----------------------- | -------- | --------------- | ------------- | ------------ | ---------------- |
+| \[ID\] | \[CASENO\]  | \[Name\]     | \[Name\] was seen by Dr \[Name\] and will need to follow up with Dr \[Name\].           | \[DATE\] | Admission Time: \[Time\] | Patient Class:\[Class\] | \[NRIC\] | Ward:\[WardNo\] | Bed:\[BedNo\] | \[PHONE\]    | \[AGE\]-year-old |
+| \[ID\] | \[CASENO\]  | \[Name\]     | \[Name\] was seen by Dr \[Name\] and Dr \[Name\] and has to follow up with Dr \[Name\]. | \[DATE\] | Admission Time: \[Time\] | Patient Class:\[Class\] | \[NRIC\] | Ward:\[WardNo\] | Bed:\[BedNo\] | \[PHONE\]    | \[AGE\]-year-old |
+
+</p>
+</details>
+
+#### Text file 
+
+Sample text file modified from sample obtained at mtsamples. Details are made up and not intended to represent any specific individual.  
  
 <details><summary>Click here to view sample text file to anonymize</summary>
 <p>
@@ -627,7 +740,7 @@ Sample:
 anonymized_file_input_color('sample_discharge_summary.txt',package=['flair','stanza'],union_intersection='union',additional_details=[1,2,3,4,5,6,7,8,9],additional_expression=[[r"(\d+.year.old)","[AGE]-year-old"]])
 ```
 
-There will be two outputs, separated by a newline. Part 1 of the output will be the original text, with relevant details having a colored font and part 2 of the output will be the anonymized text, with relevant tags having the same colored font as its original text. 
+There will be two outputs, separated by a newline. Part 1 of the output will be the original text, with identified relevant details having a colored font and part 2 of the output will be the anonymized text, with relevant tags having the same colored font as its original text. 
 
 <details><summary>Part 1</summary>
 <p>
