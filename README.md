@@ -599,6 +599,19 @@ Output:
 
 For txt file, use anonymized_file_input_color function
 
+Sample:
 
+```
+anonymized_file_input_color('sample_discharge_summary.txt',package=['flair','stanza'],union_intersection='union',additional_details=[1,2,3,4,5,6,7,8,9],additional_expression=[[r"(\d+.year.old)","[AGE]-year-old"]])
+```
 
+There will be two outputs, separated by a newline. 
+
+Part 1 of the output will be the original text, with relevant details having a colored font as shown:
+
+![Screenshot 2022-08-30 at 1 56 46 PM](https://user-images.githubusercontent.com/66881214/187361089-997306fb-5140-4b5a-a718-0014c42e2713.png)
+
+Part 2 of the output will be the anonymized text, with relevant tags having the same colored font as its original text. 
+
+![Screenshot 2022-08-30 at 2 02 26 PM](https://user-images.githubusercontent.com/66881214/187361427-610e2929-6024-4564-a18f-31c6b98b879f.png)
 
