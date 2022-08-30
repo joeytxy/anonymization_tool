@@ -271,22 +271,6 @@ Example: S1234567A
 </p>
 </details>
 
-<details><summary>Phone Number</summary>
-<p>
-
-Regular expression : r"(\d{8})"
-  
-Replaced with : "[PHONE]"
-  
-The regular expression matches any 8 consecutive digits. 
-
-```  
-Example: 91008100 
-```
-  
-</p>
-</details>
-
 <details><summary>Case Number</summary>
 <p>
 
@@ -305,7 +289,23 @@ Example :  1234567890A
 ```  
 </p>
 </details>
+
+<details><summary>Phone Number</summary>
+<p>
+
+Regular expression : r"(\d{8})"
   
+Replaced with : "[PHONE]"
+  
+The regular expression matches any 8 consecutive digits. 
+
+```  
+Example: 91008100 
+```
+  
+</p>
+</details>
+
 <details><summary>ID</summary>
 <p>
   
@@ -407,7 +407,7 @@ Replace with : "Patient Class:[Class]"
 The regular expression matches any text that start with the phrase "patient class", followed by any character except newline, followed by any whitespace character, followed by at least one occurence of a word character i.e letters, alphanumeric, digits and underscore, followed by any whitespace character, followed by any alphabet. Since IGNORECASE is specified, the alphabets can be of uppercase or lowercase.
   
 ```
-Example: patient class: CHAS B
+Example: patient class: Private A
 ```
 </p>
 </details>
@@ -552,8 +552,8 @@ It was noted that the packages may not identify lowercase names as well as names
     | Integer | Information     | 
     |---------|-----------------|
     | 1       | NRIC            |      
-    | 2       | Phone Number    |
-    | 3       | Case Number     |
+    | 2       | Case Number     |
+    | 3       | Phone Number    |
     | 4       |  ID             |
     | 5       | Date            |
     | 6       | Admission Time  |
