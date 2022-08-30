@@ -565,13 +565,27 @@ It was noted that the packages may not identify lowercase names as well as names
   - A list containing nested lists of length 2. Nested list contains a regular expression string and a string to replace identified text
   - Eg [[r"(\d{8})","[Phone]"],[r"(\d{3})","[Hundred]"]]
  
-Sample text file to anonymize: ![image](https://user-images.githubusercontent.com/66881214/186433807-fbc8d1b1-b90c-4d41-bc48-f20a6e446648.png)
+<details><summary>Click here to view sample text file to anonymize</summary>
+<p>
+
+<img width="1216" alt="Screenshot 2022-08-30 at 2 28 25 PM" src="https://user-images.githubusercontent.com/66881214/187365568-818f46b3-5860-493e-b6e6-b33bb99f2372.png">
+
+</p>
+</details>
 
 ```
-anonymized_file_input('sample_discharge_summary.txt', ['flair','stanza'], union_intersection='union', additional_details=[1,2,5])
+anonymized_file_input('sample_discharge_summary.txt',package=['flair','stanza'],union_intersection='union',additional_details=[1,2,3,4,5,6,7,8,9],additional_expression=[[r"(\d+.year.old)","[AGE]-year-old"]])
 ```
 
-Output saved as [Original File Name]\_anonymized\_.txt in same directory: ![image](https://user-images.githubusercontent.com/66881214/186435144-fb030ef5-0a12-4241-b201-a05e66450626.png)
+Output saved as [Original File Name]\_anonymized\_.txt in same directory.
+
+<details><summary>Click here to view anonymized text</summary>
+<p>
+
+<img width="1180" alt="Screenshot 2022-08-30 at 2 29 53 PM" src="https://user-images.githubusercontent.com/66881214/187365826-0d6c6904-88a6-4a3e-8d4f-0efc26a6f0fe.png">
+
+</p>
+</details>
 
 ## Instructions on Anonymization Visualization Tool
 
@@ -584,6 +598,14 @@ Note:
 3) This function does not return a downloadable file.
 
 Download and run anonymization_visualization_tool.ipynb on Jupyter Notebook. 
+
+<details><summary>Click here to view the color used for each type of personal detail</summary>
+<p>
+
+![Screenshot 2022-08-30 at 2 18 32 PM](https://user-images.githubusercontent.com/66881214/187363905-3dea92de-f82d-430a-af4c-bd99b06aee98.png)
+
+</p>
+</details>
 
 For a single manual input, use the anonymized_text_color function
 
@@ -605,13 +627,22 @@ Sample:
 anonymized_file_input_color('sample_discharge_summary.txt',package=['flair','stanza'],union_intersection='union',additional_details=[1,2,3,4,5,6,7,8,9],additional_expression=[[r"(\d+.year.old)","[AGE]-year-old"]])
 ```
 
-There will be two outputs, separated by a newline. 
+There will be two outputs, separated by a newline. Part 1 of the output will be the original text, with relevant details having a colored font and part 2 of the output will be the anonymized text, with relevant tags having the same colored font as its original text. 
 
-Part 1 of the output will be the original text, with relevant details having a colored font as shown:
+<details><summary>Part 1</summary>
+<p>
 
-![Screenshot 2022-08-30 at 1 56 46 PM](https://user-images.githubusercontent.com/66881214/187361089-997306fb-5140-4b5a-a718-0014c42e2713.png)
+![Screenshot 2022-08-30 at 2 20 02 PM](https://user-images.githubusercontent.com/66881214/187364158-5d5ff434-8035-420f-962e-3e88686e6e98.png)
 
-Part 2 of the output will be the anonymized text, with relevant tags having the same colored font as its original text. 
+</p>
+</details>
 
-![Screenshot 2022-08-30 at 2 02 26 PM](https://user-images.githubusercontent.com/66881214/187361427-610e2929-6024-4564-a18f-31c6b98b879f.png)
+<details><summary>Part 2</summary>
+<p>
+
+![Screenshot 2022-08-30 at 2 13 31 PM](https://user-images.githubusercontent.com/66881214/187363115-803e5e89-8417-4b9d-8ceb-0e8f537c2d3d.png)
+
+</p>
+</details>
+
 
