@@ -563,7 +563,7 @@ It was noted that the packages may not identify lowercase names as well as names
   
 - additional_expression: list of nested lists, optional, default None 
   - A list containing nested lists of length 2. Nested list contains a regular expression string and a string to replace identified text
-  - Eg [[r"(\d{8})","[Phone]"],[r"(\d{3})","[Hundred]"]]
+  - Eg [[r"(\d+.year.old)","[AGE]-year-old"]]
  
 <details><summary>Click here to view sample text file to anonymize</summary>
 <p>
