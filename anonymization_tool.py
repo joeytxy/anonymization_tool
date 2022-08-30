@@ -225,7 +225,7 @@ def anonymized_text(user_input,package=['stanza'],union_intersection=None,additi
                 final_return = re.sub(r"(patient class.\s\w+\s[A-Z])", "Patient Class:[Class]", final_return, flags=re.IGNORECASE)
         if additional_expression!=None:
             for i in additional_expression:
-                final_return = re.sub(i[0],i[1],final_return)
+                final_return = re.sub(i[0],i[1],final_return, flags=re.IGNORECASE)
         return final_return
 
 def anonymized_file_input(user_input,package=['stanza'],union_intersection=None,additional_details=None,additional_expression=None):
