@@ -143,11 +143,9 @@ def anonymized_text(user_input,package=['stanza'],union_intersection=None,additi
             
         if 'stanza' in package:
             stanza_doc=stanza_nlp(user_input)
-            tag_list=[]
-            stanza_name_list=[]
+            stanza_index_list=[]
             #append range (start char index,end char index) of person name identified to list
             for i in range(0,len(stanza_doc.sentences)):
-                stanza_index_list=[]
                 for entity in stanza_doc.entities:
                     if entity.type=="PERSON":
                         if len(stanza_index_list)>0 and entity.start_char==stanza_index_list[-1][1]+1:
