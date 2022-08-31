@@ -640,7 +640,7 @@ As seen in the screenshot above, the tool is able to take in forwardslash as an 
 <details><summary>Empty Strings</summary>
 <p>
  
-NLTK is unable to accept empty strings as an input. The other 3 packages will return a empty string as shown below:
+In this tool, the NLTK option is unable to accept empty strings as an input. The other 3 packages will return a empty string as shown below:
   
 ![Screenshot 2022-08-31 at 12 46 17 AM](https://user-images.githubusercontent.com/66881214/187493746-2c26c7db-e03c-44a5-b161-69bc385310f2.png)
 
