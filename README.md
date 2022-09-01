@@ -485,7 +485,7 @@ It can be observed that flair provides us with the correct output since  ``` 's 
 
 (Values include resources involved in importing the packages)
 
-It can be observed that spaCy and NLTK are the faster packages, but at the expense of recall and precision. Although flair and stanza gave a higher recall and precision, they took a much longer time, about 30 times longer than that of spaCy, and about 10 times longer than that of NLTK. 
+It can be observed that spaCy and NLTK are the faster packages, but at the expense of recall and precision. Although flair and stanza gave a higher recall and precision, they took a much longer time, at least 30 times longer than that of spaCy, and at least 10 times longer than that of NLTK. 
 
 It is also expected that the union and intersection will take a much longer time since they involve all packages. However, the intersection option did not do very well, which is not surprising since it is more restrictive. 
 
