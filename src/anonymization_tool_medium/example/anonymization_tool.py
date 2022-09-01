@@ -51,55 +51,58 @@ def anonymized_text(user_input,package=['stanza'],union_intersection=None,additi
         accumulated=[]
         
         if 'nltk' in package:
-            df=pd.DataFrame()
-            
-            #obtain word and corresponding tag
-            for chunk in nltk.ne_chunk(nltk.pos_tag(nltk.word_tokenize(user_input))):
-                if hasattr(chunk,'label'):
-                    for c in chunk:
-                        data={'word':[c[0]],'label':[chunk.label()]}
+            if user_input.strip()=="":
+                accumulated.append([])
+            else:
+                df=pd.DataFrame()
+
+                #obtain word and corresponding tag
+                for chunk in nltk.ne_chunk(nltk.pos_tag(nltk.word_tokenize(user_input))):
+                    if hasattr(chunk,'label'):
+                        for c in chunk:
+                            data={'word':[c[0]],'label':[chunk.label()]}
+                            tmp = pd.DataFrame(data)
+                            df=pd.concat([df,tmp])
+
+                    else:
+                        data={'word':[chunk[0]],'label':[chunk[1]]}
                         tmp = pd.DataFrame(data)
                         df=pd.concat([df,tmp])
-            
-                else:
-                    data={'word':[chunk[0]],'label':[chunk[1]]}
-                    tmp = pd.DataFrame(data)
-                    df=pd.concat([df,tmp])
-            counter=0
-            list_of_indices=[]
-            df['word']=df['word'].str.replace("\`\`","\"")
-            df['word']=df['word'].str.replace("\'\'","\"")
-            #search for word's start index to end index in user_input
-            for i in df['word']:
-                while counter<len(user_input):
-                    if i==user_input[counter:counter+len(i)]:
-                        list_of_indices.append([counter,counter+len(i)])
-                        counter=counter+len(i)
-                        break
+                counter=0
+                list_of_indices=[]
+                df['word']=df['word'].str.replace("\`\`","\"")
+                df['word']=df['word'].str.replace("\'\'","\"")
+                #search for word's start index to end index in user_input
+                for i in df['word']:
+                    while counter<len(user_input):
+                        if i==user_input[counter:counter+len(i)]:
+                            list_of_indices.append([counter,counter+len(i)])
+                            counter=counter+len(i)
+                            break
+                        else:
+                            counter=counter+1
+                df['index']=list_of_indices
+
+                #to obtain person name 
+                df=df[df['label']=="PERSON"] #obtain a df (example row: Anna  PERSON  [0,4])
+                nltk_index_list=[]
+
+                #append each range (start char index, end char index) of name to list
+                #combine if the words are consecutive (to eliminate problem of identifying first name and last name as two names)
+                for i in df['index']:
+                    if len(nltk_index_list)>0 and i[0]==nltk_index_list[-1][1]+1:
+                        nltk_index_list[-1][1]=i[1]
                     else:
-                        counter=counter+1
-            df['index']=list_of_indices
+                        nltk_index_list.append(i)
 
-            #to obtain person name 
-            df=df[df['label']=="PERSON"] #obtain a df (example row: Anna  PERSON  [0,4])
-            nltk_index_list=[]
+                #if user chooses to just use nltk to anonymize text then use each range directly
+                if len(package)==1:
+                    accumulated.append(nltk_index_list)
 
-            #append each range (start char index, end char index) of name to list
-            #combine if the words are consecutive (to eliminate problem of identifying first name and last name as two names)
-            for i in df['index']:
-                if len(nltk_index_list)>0 and i[0]==nltk_index_list[-1][1]+1:
-                    nltk_index_list[-1][1]=i[1]
+                #if need to union/intersect, obtain full list of character index      
                 else:
-                    nltk_index_list.append(i)
-
-            #if user chooses to just use nltk to anonymize text then use each range directly
-            if len(package)==1:
-                accumulated.append(nltk_index_list)
-
-            #if need to union/intersect, obtain full list of character index      
-            else:
-                nltk_index=index_list(nltk_index_list)
-                accumulated.append(nltk_index)
+                    nltk_index=index_list(nltk_index_list)
+                    accumulated.append(nltk_index)
             
         if 'spacy' in package:
             spacy_doc = spacy_nlp(user_input)
