@@ -5,8 +5,13 @@ import re
 import nltk
 from nltk import word_tokenize,pos_tag
 import spacy
-import en_core_web_sm
-spacy_nlp = en_core_web_sm.load()
+try:
+    spacy_nlp = spacy.load('en_core_web_sm')
+except OSError:
+    print('Downloading en_core_web_sm.')
+    from spacy.cli import download
+    download('en_core_web_sm')
+    spacy_nlp = spacy.load('en_core_web_sm')
 from flair.data import Sentence
 from flair.models import SequenceTagger
 from flair.tokenization import SpacyTokenizer
