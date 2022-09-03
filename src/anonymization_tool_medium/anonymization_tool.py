@@ -8,7 +8,7 @@ import spacy
 try:
     spacy_nlp = spacy.load('en_core_web_sm')
 except OSError:
-    print('Downloading en_core_web_sm.')
+    print('Downloading en_core_web_sm...')
     from spacy.cli import download
     download('en_core_web_sm')
     spacy_nlp = spacy.load('en_core_web_sm')
@@ -75,8 +75,8 @@ def anonymized_text(user_input,package=['stanza'],union_intersection=None,additi
                         df=pd.concat([df,tmp])
                 counter=0
                 list_of_indices=[]
-                df['word']=df['word'].str.replace("\`\`","\"")
-                df['word']=df['word'].str.replace("\'\'","\"")
+                df['word']=df['word'].str.replace("\`\`","\"",regex=True)
+                df['word']=df['word'].str.replace("\'\'","\"",regex=True)
                 #search for word's start index to end index in user_input
                 for i in df['word']:
                     while counter<len(user_input):
