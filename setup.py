@@ -13,9 +13,9 @@ setup(
     install_requires=[
         'nltk==3.6.1',
         'spacy==3.4.1',
-        'https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.4.0/en_core_web_sm-3.4.0.tar.gz#egg=en_core_web_sm',
         'flair==0.11.3',
         'stanza==1.4.0',
         'pandas==1.3.1'
         ],
+    dependency_links=['https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.4.0/en_core_web_sm-3.4.0.tar.gz#egg=en_core_web_sm'],
     )
