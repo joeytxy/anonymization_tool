@@ -2,7 +2,7 @@ from setuptools import setup,find_packages
 
 setup(
     name='anonymization_tool',
-    version='0.1',
+    version='0.10',
     description='Anonymisation Tool',
     long_description='A tool which utilises NER packages such as flair, NLTK,spaCy and stanza to mask personal names (default). Other information such as NRIC, phone number etc can also be masked by giving corresponding input.',
     license='MIT',
