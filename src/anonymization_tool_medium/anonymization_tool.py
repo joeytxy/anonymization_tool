@@ -17,8 +17,12 @@ from flair.models import SequenceTagger
 from flair.tokenization import SpacyTokenizer
 tagger=SequenceTagger.load('ner')
 import stanza
-stanza_nlp = stanza.Pipeline('en', download_method=None)
-
+try:
+    stanza_nlp = stanza.Pipeline('en', download_method=None)
+except OSError:
+    print('Downloading en model')
+    stanza.download('en')
+    stanza_nlp = stanza.Pipeline('en', download_method=None)
 def anonymized_text(user_input,package=['stanza'],union_intersection=None,additional_details=None,additional_expression=None):
     if len(package)==1 and union_intersection!=None:
         raise Exception("Unable to combine less than 2 packages")
