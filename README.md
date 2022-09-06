@@ -155,7 +155,7 @@ Citation for flair package:
 }
 ```
 
-For more information regarding the NLTK package, its GitHub page can be found [here](https://github.com/flairNLP/flair)
+For more information regarding the flair package, its GitHub page can be found [here](https://github.com/flairNLP/flair)
 
 To use the package, run the following line in your command prompt/terminal:
 
