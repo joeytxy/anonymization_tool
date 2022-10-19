@@ -18,7 +18,7 @@ from flair.tokenization import SpacyTokenizer
 tagger=SequenceTagger.load('ner')
 import stanza
 try:
-    stanza_nlp = stanza.Pipeline('en', download_method=None)
+    stanza_nlp = stanza.Pipeline('en')
 except OSError:
     print('Downloading en model')
     stanza.download('en')
